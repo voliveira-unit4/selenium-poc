@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d5329e8a-b9c5-4546-baa3-9b14f094ba44": {
+      "ProjectGuid": "d5329e8a-b9c5-4546-baa3-9b14f094ba44",
+      "DisplayName": "selenium-poc-sr",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
