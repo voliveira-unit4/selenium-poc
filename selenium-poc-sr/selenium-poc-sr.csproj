@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="drivers\" />
+    <Folder Include="pages\" />
   </ItemGroup>
 
   <ItemGroup>
