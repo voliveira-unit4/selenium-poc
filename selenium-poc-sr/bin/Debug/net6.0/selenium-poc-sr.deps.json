@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "selenium-poc-sr/1.0.0": {
         "dependencies": {
+          "Gravity.Core": "2021.9.12.3",
           "Microsoft.NET.Test.Sdk": "16.11.0",
           "NUnit": "3.13.2",
           "NUnit3TestAdapter": "4.0.0",
@@ -20,6 +21,17 @@
         }
       },
       "coverlet.collector/3.1.0": {},
+      "Gravity.Core/2021.9.12.3": {
+        "dependencies": {
+          "Selenium.Support": "4.1.0"
+        },
+        "runtime": {
+          "lib/net5.0/Gravity.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Microsoft.CodeCoverage/16.11.0": {
         "runtime": {
           "lib/netcoreapp1.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
@@ -352,6 +364,13 @@
       "sha512": "sha512-YzYqSRrjoP5lULBhTDcTOjuM4IDPPi6PhFsl4w8EI4WdZhE6llt7E38Tg4CHyrS+QKwyu1+9OwkdDgluOdoBTw==",
       "path": "coverlet.collector/3.1.0",
       "hashPath": "coverlet.collector.3.1.0.nupkg.sha512"
+    },
+    "Gravity.Core/2021.9.12.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hd5RXtxxdf0TC6J9DP4D+23c745i+lcoBe2rGY/3q21FHKYecVv3+CnYhcQDQilQXDyPyGhzkOG+4gKHuqNk1A==",
+      "path": "gravity.core/2021.9.12.3",
+      "hashPath": "gravity.core.2021.9.12.3.nupkg.sha512"
     },
     "Microsoft.CodeCoverage/16.11.0": {
       "type": "package",

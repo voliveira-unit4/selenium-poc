@@ -99,3 +99,4 @@ C:\VO\repos\selenium-poc\selenium-poc-sr\obj\Debug\net6.0\selenium-poc-sr.dll
 C:\VO\repos\selenium-poc\selenium-poc-sr\obj\Debug\net6.0\ref\selenium-poc-sr.dll
 C:\VO\repos\selenium-poc\selenium-poc-sr\obj\Debug\net6.0\selenium-poc-sr.pdb
 C:\VO\repos\selenium-poc\selenium-poc-sr\obj\Debug\net6.0\selenium-poc-sr.genruntimeconfig.cache
+C:\VO\repos\selenium-poc\selenium-poc-sr\bin\Debug\net6.0\Gravity.Core.dll

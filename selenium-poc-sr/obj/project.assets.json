@@ -8,6 +8,18 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
+      "Gravity.Core/2021.9.12.3": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.Support": "3.141.0"
+        },
+        "compile": {
+          "lib/net5.0/Gravity.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Gravity.Core.dll": {}
+        }
+      },
       "Microsoft.CodeCoverage/16.11.0": {
         "type": "package",
         "compile": {
@@ -435,6 +447,18 @@
         "coverlet-icon.png",
         "coverlet.collector.3.1.0.nupkg.sha512",
         "coverlet.collector.nuspec"
+      ]
+    },
+    "Gravity.Core/2021.9.12.3": {
+      "sha512": "hd5RXtxxdf0TC6J9DP4D+23c745i+lcoBe2rGY/3q21FHKYecVv3+CnYhcQDQilQXDyPyGhzkOG+4gKHuqNk1A==",
+      "type": "package",
+      "path": "gravity.core/2021.9.12.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gravity.core.2021.9.12.3.nupkg.sha512",
+        "gravity.core.nuspec",
+        "lib/net5.0/Gravity.Core.dll"
       ]
     },
     "Microsoft.CodeCoverage/16.11.0": {
@@ -1307,6 +1331,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Gravity.Core >= 2021.9.12.3",
       "Microsoft.NET.Test.Sdk >= 16.11.0",
       "NUnit >= 3.13.2",
       "NUnit3TestAdapter >= 4.0.0",
@@ -1361,6 +1386,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Gravity.Core": {
+            "target": "Package",
+            "version": "[2021.9.12.3, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.11.0, )"
