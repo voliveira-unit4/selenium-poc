@@ -9,6 +9,7 @@ using System.Threading;
 
 using selenium_poc_sr.pages;
 using selenium_poc_sr.entities;
+using selenium_poc_sr.helpers;
 using System.IO;
 using System.Text;
 using System.Net.Http;
@@ -35,17 +36,17 @@ namespace selenium_poc_sr
             #region get fake person data
 
             #region by using httprequest
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://api.namefake.com/english-united-states");
-            request.Headers.Add("Accept", "application/json");
+            //HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "https://api.namefake.com/english-united-states");
+            //request.Headers.Add("Accept", "application/json");
 
-            HttpResponseMessage response = client.Send(request);
-            Stream stream = response.Content.ReadAsStream();
-            string strResponse = "";
+            //HttpResponseMessage response = client.Send(request);
+            //Stream stream = response.Content.ReadAsStream();
+            //string strResponse = "";
 
-            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-            {
-                strResponse = reader.ReadToEnd();
-            }
+            //using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            //{
+            //    strResponse = reader.ReadToEnd();
+            //}
             #endregion
 
             driver.Navigate().GoToUrl("https://www.fakenamegenerator.com/");
@@ -82,9 +83,19 @@ namespace selenium_poc_sr
 
             #endregion
 
-            Thread.Sleep(7000);
+            Thread.Sleep(3000);
 
             driver.Quit();
+
+            #region trigger EK [vo sln] U4_SEV_NewHires_MAIL_01.0
+
+            string triggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/990e9af8-2568-494f-a880-b69042feebb5?sig=aMEiyzaI0JNMjvzJAuCLIMDvrm2WAX4R6KLF95KjSDw%253d";
+            string triggerResponse;
+
+            WebhookTrigger wt = new WebhookTrigger(client, triggerUrl);
+            triggerResponse = wt.Trigger();
+
+            #endregion
         }
     }
 }
