@@ -83,9 +83,7 @@ namespace selenium_poc_sr
 
             #endregion
 
-            Thread.Sleep(3000);
-
-            driver.Quit();
+            Thread.Sleep(2000);
 
             #region trigger EK [vo sln] U4_SEV_NewHires_MAIL_01.0
 
@@ -96,6 +94,34 @@ namespace selenium_poc_sr
             triggerResponse = wt.Trigger();
 
             #endregion
+
+            #region ERPx login
+
+            driver.Navigate().GoToUrl("https://erpx.unit4cloud-lab.com/");
+
+            ERPxSignInOrg erpxSignInOrg = new ERPxSignInOrg(driver, wait);
+            erpxSignInOrg.SignIn("u4erx_pso_int");
+
+            Thread.Sleep(3000);
+
+            ERPxSignInUser erpxSignInUser = new ERPxSignInUser(driver, wait);
+            erpxSignInUser.SignIn("system@u4im.com");
+
+            Thread.Sleep(3000);
+
+            ERPxSignInPassword erpxSignInPassword = new ERPxSignInPassword(driver, wait);
+            erpxSignInPassword.SignIn("IndModels21!");
+
+            Thread.Sleep(3000);
+
+            ERPxSignInFinal erpxSignInFinal = new ERPxSignInFinal(driver, wait);
+            erpxSignInFinal.SignIn();
+
+            #endregion
+
+            Thread.Sleep(7000);
+
+            driver.Quit();
         }
     }
 }
