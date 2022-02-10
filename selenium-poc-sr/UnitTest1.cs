@@ -87,11 +87,11 @@ namespace selenium_poc_sr
 
             #region trigger EK [vo sln] U4_SEV_NewHires_MAIL_01.0
 
-            string triggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/990e9af8-2568-494f-a880-b69042feebb5?sig=aMEiyzaI0JNMjvzJAuCLIMDvrm2WAX4R6KLF95KjSDw%253d";
-            string triggerResponse;
+            string ek1TriggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/990e9af8-2568-494f-a880-b69042feebb5?sig=aMEiyzaI0JNMjvzJAuCLIMDvrm2WAX4R6KLF95KjSDw%253d";
+            string ek1TriggerResponse;
 
-            WebhookTrigger wt = new WebhookTrigger(client, triggerUrl);
-            triggerResponse = wt.Trigger();
+            WebhookTrigger wt1 = new WebhookTrigger(client, ek1TriggerUrl);
+            ek1TriggerResponse = wt1.Trigger();
 
             #endregion
 
@@ -107,12 +107,12 @@ namespace selenium_poc_sr
             ERPxSignInUser erpxSignInUser = new ERPxSignInUser(driver, wait);
             erpxSignInUser.SignIn("system@u4im.com");
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
 
             ERPxSignInPassword erpxSignInPassword = new ERPxSignInPassword(driver, wait);
             erpxSignInPassword.SignIn("IndModels21!");
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
 
             ERPxSignInFinal erpxSignInFinal = new ERPxSignInFinal(driver, wait);
             erpxSignInFinal.SignIn();
@@ -128,9 +128,23 @@ namespace selenium_poc_sr
 
             #endregion
 
-            Thread.Sleep(7000);
+            Thread.Sleep(3000);
 
             driver.Quit();
+
+            Thread.Sleep(TimeSpan.FromMinutes(3));
+
+            #region trigger EK [vo sln] U4_SEV_updateSRCandidateERPxEmployeeId_HTTP_01.00
+
+            string ek2TtriggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/2b9d48bd-f92b-4aa7-ac72-4ee160a7bdc1?sig=FyhWUYxVySB47S0g33FzLIo2AX4WCYrrsFLFrUPYhds%253d";
+            string ek2TriggerResponse;
+
+            WebhookTrigger wt2 = new WebhookTrigger(client, ek2TtriggerUrl);
+            ek2TriggerResponse = wt2.Trigger();
+
+            #endregion
+
+           
         }
     }
 }

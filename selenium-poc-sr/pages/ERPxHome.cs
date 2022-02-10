@@ -17,7 +17,7 @@ namespace selenium_poc_sr.pages
         protected WebDriverWait wait;
 
         private By tasksIconBy = By.CssSelector("#u4_button-1066-btnEl");
-        private By goToTasksBy = By.Id("u4_pagebutton-1583-btnIconEl");
+        private By goToTasksBy = By.XPath("/html/body/div[8]/div[3]/div/div[3]/div/div/a/span/span/span[2]");       
 
         public ERPxHome(WebDriver driver, WebDriverWait wait)
         {
