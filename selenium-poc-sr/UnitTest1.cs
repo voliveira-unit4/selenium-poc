@@ -119,6 +119,15 @@ namespace selenium_poc_sr
 
             #endregion
 
+            #region ERPx goto tasks
+
+            Thread.Sleep(5000);
+
+            ERPxHome erpxHome = new ERPxHome(driver, wait);
+            erpxHome.GotoTasks();
+
+            #endregion
+
             Thread.Sleep(7000);
 
             driver.Quit();
