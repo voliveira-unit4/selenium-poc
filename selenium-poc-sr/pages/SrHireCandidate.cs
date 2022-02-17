@@ -41,13 +41,17 @@ namespace selenium_poc_sr.pages
             this.wait = wait;
         }
 
-        public void HireCandidate(Person person)
+        public string HireCandidate(Person person)
         {
+            string candidateId = "";
+
             By candidatenameBy = By.CssSelector($"a[title='{person.FirstName} {person.LastName}']");
             
             wait.Until(ExpectedConditions.ElementToBeClickable(candidatenameBy)).Click();
 
             Thread.Sleep(2000);
+
+            candidateId = driver.Url.Split("/")[6].Split("?")[0];
 
             wait.Until(ExpectedConditions.ElementToBeClickable(convertBy)).Click();
 
@@ -80,6 +84,8 @@ namespace selenium_poc_sr.pages
             wait.Until(ExpectedConditions.ElementToBeClickable(countryBy)).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(submitBy)).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(closeDialogBy)).Click();
+
+            return candidateId;
         }
     }
 

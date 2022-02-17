@@ -26,7 +26,7 @@ namespace selenium_poc_sr
         const string srExternalSystem = "Smart Recruiters";
 
         private ChromeDriver driver = new ChromeDriver();
-        private HttpClient client = new HttpClient();
+        private HttpClient client = new HttpClient();        
 
         [SetUp]
         public void Setup()
@@ -86,7 +86,7 @@ namespace selenium_poc_sr
             #region hire candidate
 
             SrHireCandidate srHireCandidate = new SrHireCandidate(driver, wait);
-            srHireCandidate.HireCandidate(person);
+            string candidateId = srHireCandidate.HireCandidate(person);
 
             #endregion
 
@@ -104,7 +104,6 @@ namespace selenium_poc_sr
 
             #region check new employee creation awaits approval
 
-            string candidateId = "5a669bfc-5967-4b2e-962b-0c7d96d336bd";
             string url = $"{erpxApiBaseUrl}/v1/objects/workflow-transactions?filter=workflowProcess/elementTypeId eq 'RES' and taskDetails/col9Value eq '{candidateId}'&historicalItems=false&activeItems=true";
             
             ERPxApiCall erpxCall = new ERPxApiCall(client, authUrl, clientId, clientSecret);
