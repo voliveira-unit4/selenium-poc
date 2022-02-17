@@ -2,7 +2,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-//using OpenQA.Selenium.Extensions;
 using OpenQA.Selenium.Common;
 using System;
 using System.Threading;
@@ -13,6 +12,8 @@ using selenium_poc_sr.helpers;
 using System.IO;
 using System.Text;
 using System.Net.Http;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace selenium_poc_sr
 {
@@ -105,9 +106,18 @@ namespace selenium_poc_sr
             #region check new employee creation awaits approval
 
             string url = $"{erpxApiBaseUrl}/v1/objects/workflow-transactions?filter=workflowProcess/elementTypeId eq 'RES' and taskDetails/col9Value eq '{candidateId}'&historicalItems=false&activeItems=true";
-            
+
+            string response = "[]";
             ERPxApiCall erpxCall = new ERPxApiCall(client, authUrl, clientId, clientSecret);
-            string response = erpxCall.Get(url);
+            Stopwatch sw = Stopwatch.StartNew();
+
+            do
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(30));
+                response = erpxCall.Get(url);
+            } while (response == "[]" && sw.Elapsed.Minutes < 3);
+
+            dynamic wfdata = JArray.Parse(response);
 
             #endregion
 
