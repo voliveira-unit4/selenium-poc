@@ -13,7 +13,7 @@ using System.IO;
 using System.Text;
 using System.Net.Http;
 using System.Diagnostics;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace selenium_poc_sr
 {
@@ -115,9 +115,9 @@ namespace selenium_poc_sr
             {
                 Thread.Sleep(TimeSpan.FromSeconds(30));
                 response = erpxCall.Get(url);
-            } while (response == "[]" && sw.Elapsed.Minutes < 3);
+            } while (response == "[]" && sw.Elapsed.Minutes < 4);
 
-            dynamic wfdata = JArray.Parse(response);
+            WorkflowTask[] wftasks = JsonConvert.DeserializeObject<WorkflowTask[]>(response);
 
             #endregion
 
