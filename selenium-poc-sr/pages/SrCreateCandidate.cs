@@ -40,24 +40,40 @@ namespace selenium_poc_sr.pages
         }
 
         public void CreateCandidate(Person person)
-        {
+        {                       
             driver.FindElement(dropdownBy).Click();
             driver.FindElement(addcandidateBy).Click();
             driver.FindElement(fillmanuallyBy).Click();
 
+            wait.Until(ExpectedConditions.ElementToBeClickable(firstnameBy)).Click();
             driver.FindElement(firstnameBy).SendKeys(person.FirstName);
-            driver.FindElement(lastnameBy).SendKeys(person.LastName);
-            driver.FindElement(locationBy).SendKeys(person.City);
-            driver.FindElement(phonenumberBy).SendKeys(person.Phone);
-            driver.FindElement(emailBy).SendKeys(person.Email);
-            driver.FindElement(sourcetypepickerBy).Click();
-            driver.FindElement(sourcetypeBy).Click();
-            driver.FindElement(jobpickerBy).SendKeys("Smart Recruiters operator");
-            driver.FindElement(jobBy).Click();
-            driver.FindElement(sourcedetailBy).SendKeys("ACCA Careers");
-            driver.FindElement(sourceBy).Click();
 
-            Thread.Sleep(1000);
+            wait.Until(ExpectedConditions.ElementToBeClickable(lastnameBy)).Click();
+            driver.FindElement(lastnameBy).SendKeys(person.LastName);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(locationBy)).Click();
+            driver.FindElement(locationBy).SendKeys(person.City);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(phonenumberBy)).Click();
+            driver.FindElement(phonenumberBy).SendKeys(person.Phone);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(emailBy)).Click();
+            driver.FindElement(emailBy).SendKeys(person.Email);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(sourcetypepickerBy)).Click();
+            driver.FindElement(sourcetypepickerBy).Click();
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(sourcetypeBy)).Click();
+            driver.FindElement(sourcetypeBy).Click();
+
+            driver.FindElement(jobpickerBy).SendKeys("Smart Recruiters operator");
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(jobBy)).Click();
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(sourcedetailBy)).Click();
+            driver.FindElement(sourcedetailBy).SendKeys("ACCA Careers");
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(sourceBy)).Click();
 
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("st-submitCandidate"))).Click();
         }

@@ -30,13 +30,10 @@ namespace selenium_poc_sr.pages
         private By addresscityBy = By.CssSelector("input[name='EmployeeCity']");
         private By addresszipcodeBy = By.CssSelector("input[name='EmployeeZipCode']");
         private By addressstateBy = By.CssSelector("input[name='EmployeeState']");
-
-
-
-
         private By countryselectBy = By.CssSelector("#st-candidateView > main > div.box.profile-actions.padding--none.print--hidden > sr-application-action-tabs > div.ng-scope > sr-candidate-hire > div > hire-form > span > div > div > form-builder > div.dialog-content.ng-dirty.ng-valid-date-disabled.ng-valid-parse.ng-valid-date.ng-valid.ng-valid-required > fieldset > div > div:nth-child(12) > single-select-field > label > span:nth-child(4) > large-select > select");
         private By countryBy = By.CssSelector("option[value='1399390f-a5d5-4df8-b097-15485e5f298d']");
         private By submitBy = By.Id("st-submitForm");
+        private By closeDialogBy = By.CssSelector("#ngdialog1 > div.ngdialog-content > div > button");
 
         public SrHireCandidate(WebDriver driver, WebDriverWait wait)
         {
@@ -50,28 +47,39 @@ namespace selenium_poc_sr.pages
             
             wait.Until(ExpectedConditions.ElementToBeClickable(candidatenameBy)).Click();
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
 
             wait.Until(ExpectedConditions.ElementToBeClickable(convertBy)).Click();
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
 
             wait.Until(ExpectedConditions.ElementToBeClickable(processstepsBy)).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(hireBy)).Click();
 
-            driver.FindElement(datepickerBy).Click();
-            driver.FindElement(currentedayBy).Click();
-            driver.FindElement(integrationselectBy).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(datepickerBy)).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(currentedayBy)).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(integrationselectBy)).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(integrateerpxBy)).Click();
-            driver.FindElement(shortnameBy).SendKeys(person.ShortName);
-            driver.FindElement(addressline1By).SendKeys(person.StreetAddress);
-            driver.FindElement(addresscityBy).SendKeys(person.City);
-            driver.FindElement(addresszipcodeBy).SendKeys(person.ZipCode);
-            driver.FindElement(addressstateBy).SendKeys(person.State);
-            driver.FindElement(countryselectBy).Click();
-            wait.Until(ExpectedConditions.ElementToBeClickable(countryBy)).Click();
 
-            driver.FindElement(submitBy).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(shortnameBy)).Click();
+            driver.FindElement(shortnameBy).SendKeys(person.ShortName);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(addressline1By)).Click();
+            driver.FindElement(addressline1By).SendKeys(person.StreetAddress);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(addresscityBy)).Click();
+            driver.FindElement(addresscityBy).SendKeys(person.City);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(addresszipcodeBy)).Click();
+            driver.FindElement(addresszipcodeBy).SendKeys(person.ZipCode);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(addressstateBy)).Click();
+            driver.FindElement(addressstateBy).SendKeys(person.State);
+
+            wait.Until(ExpectedConditions.ElementToBeClickable(countryselectBy)).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(countryBy)).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(submitBy)).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(closeDialogBy)).Click();
         }
     }
 

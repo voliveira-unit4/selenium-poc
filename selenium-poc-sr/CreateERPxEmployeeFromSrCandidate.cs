@@ -16,8 +16,15 @@ using System.Net.Http;
 
 namespace selenium_poc_sr
 {
-    public class Tests
+    public class CreateERPxEmployeeFromSrCandidate
     {
+        const string authUrl = "https://t-eu-ids1.unit4cloud-lab.com/identity/connect/token";
+        const string clientId = "u4erp-api-u4erx_pso_int-m2m";
+        const string clientSecret = "114a80a9-38ec-48f8-8527-fa794714867b";
+        const string erpxApiBaseUrl = "https://eu01.erpx-api.unit4cloud-lab.com";
+        const string erpxCompanyId = "X10";
+        const string srExternalSystem = "Smart Recruiters";
+
         private ChromeDriver driver = new ChromeDriver();
         private HttpClient client = new HttpClient();
 
@@ -74,7 +81,7 @@ namespace selenium_poc_sr
 
             #endregion
 
-            Thread.Sleep(3000);
+            Thread.Sleep(500);
 
             #region hire candidate
 
@@ -83,7 +90,7 @@ namespace selenium_poc_sr
 
             #endregion
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             #region trigger EK [vo sln] U4_SEV_NewHires_MAIL_01.0
 
@@ -95,56 +102,66 @@ namespace selenium_poc_sr
 
             #endregion
 
-            #region ERPx login
+            #region check new employee creation awaits approval
 
-            driver.Navigate().GoToUrl("https://erpx.unit4cloud-lab.com/");
-
-            ERPxSignInOrg erpxSignInOrg = new ERPxSignInOrg(driver, wait);
-            erpxSignInOrg.SignIn("u4erx_pso_int");
-
-            Thread.Sleep(3000);
-
-            ERPxSignInUser erpxSignInUser = new ERPxSignInUser(driver, wait);
-            erpxSignInUser.SignIn("system@u4im.com");
-
-            Thread.Sleep(2000);
-
-            ERPxSignInPassword erpxSignInPassword = new ERPxSignInPassword(driver, wait);
-            erpxSignInPassword.SignIn("IndModels21!");
-
-            Thread.Sleep(2000);
-
-            ERPxSignInFinal erpxSignInFinal = new ERPxSignInFinal(driver, wait);
-            erpxSignInFinal.SignIn();
+            string candidateId = "5a669bfc-5967-4b2e-962b-0c7d96d336bd";
+            string url = $"{erpxApiBaseUrl}/v1/objects/workflow-transactions?filter=workflowProcess/elementTypeId eq 'RES' and taskDetails/col9Value eq '{candidateId}'&historicalItems=false&activeItems=true";
+            
+            ERPxApiCall erpxCall = new ERPxApiCall(client, authUrl, clientId, clientSecret);
+            string response = erpxCall.Get(url);
 
             #endregion
 
-            #region ERPx goto tasks
+            //#region ERPx login
 
-            Thread.Sleep(5000);
+            //driver.Navigate().GoToUrl("https://erpx.unit4cloud-lab.com/");
 
-            ERPxHome erpxHome = new ERPxHome(driver, wait);
-            erpxHome.GotoTasks();
+            //ERPxSignInOrg erpxSignInOrg = new ERPxSignInOrg(driver, wait);
+            //erpxSignInOrg.SignIn("u4erx_pso_int");
 
-            #endregion
+            //Thread.Sleep(3000);
 
-            Thread.Sleep(3000);
+            //ERPxSignInUser erpxSignInUser = new ERPxSignInUser(driver, wait);
+            //erpxSignInUser.SignIn("system@u4im.com");
+
+            //Thread.Sleep(2000);
+
+            //ERPxSignInPassword erpxSignInPassword = new ERPxSignInPassword(driver, wait);
+            //erpxSignInPassword.SignIn("IndModels21!");
+
+            //Thread.Sleep(2000);
+
+            //ERPxSignInFinal erpxSignInFinal = new ERPxSignInFinal(driver, wait);
+            //erpxSignInFinal.SignIn();
+
+            //#endregion
+
+            //#region ERPx goto tasks
+
+            //Thread.Sleep(5000);
+
+            //ERPxHome erpxHome = new ERPxHome(driver, wait);
+            //erpxHome.GotoTasks();
+
+            //#endregion
+
+            //Thread.Sleep(2000);
 
             driver.Quit();
 
-            Thread.Sleep(TimeSpan.FromMinutes(3));
+            //Thread.Sleep(TimeSpan.FromMinutes(3));
 
-            #region trigger EK [vo sln] U4_SEV_updateSRCandidateERPxEmployeeId_HTTP_01.00
+            //#region trigger EK [vo sln] U4_SEV_updateSRCandidateERPxEmployeeId_HTTP_01.00
 
-            string ek2TtriggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/2b9d48bd-f92b-4aa7-ac72-4ee160a7bdc1?sig=FyhWUYxVySB47S0g33FzLIo2AX4WCYrrsFLFrUPYhds%253d";
-            string ek2TriggerResponse;
+            //string ek2TtriggerUrl = "https://t-eun-ek1-serverless-gateway.azure-api.net/webhook/v2/2b9d48bd-f92b-4aa7-ac72-4ee160a7bdc1?sig=FyhWUYxVySB47S0g33FzLIo2AX4WCYrrsFLFrUPYhds%253d";
+            //string ek2TriggerResponse;
 
-            WebhookTrigger wt2 = new WebhookTrigger(client, ek2TtriggerUrl);
-            ek2TriggerResponse = wt2.Trigger();
+            //WebhookTrigger wt2 = new WebhookTrigger(client, ek2TtriggerUrl);
+            //ek2TriggerResponse = wt2.Trigger();
 
-            #endregion
+            //#endregion
 
-           
+
         }
     }
 }
